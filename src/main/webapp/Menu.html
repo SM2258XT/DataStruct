@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html xmlns="">
+<head lang="en">
+    <meta content="text/html" ; charset="utf-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
+    <title>菜单栏</title>
+    <style>
+        @keyframes masked-animation {
+            0% {
+                background-position: 0  0;
+            }
+            100% {
+                background-position: -100%  0;
+            }
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: "微软雅黑", Helvetica, Arial, sans-serif;
+        }
+
+        ul, li {
+            list-style: none;
+            z-index: 1;
+        }
+
+        .top {
+            background: #4db3a4;
+            height: 60px;
+            width: 100%;
+            padding: 0 10%;
+            box-sizing: border-box;
+        }
+
+        .main-nav {
+            display: flex;
+            line-height: 60px;
+            justify-content: space-around;
+        }
+       #title{
+           font-family: 新細明體-ExtB;
+           background-image: -webkit-linear-gradient(left,blue,#66ffff 10%,#cc00ff 20%,#CC00CC 30%, #CCCCFF 40%, #00FFFF 50%,#CCCCFF 60%,#CC00CC 70%,#CC00FF 80%,#66FFFF 90%,blue 100%);
+           -webkit-text-fill-color: transparent;/* 将字体设置成透明色 */
+           -webkit-background-clip: text;/* 裁剪背景图，使文字作为裁剪区域向外裁剪 */
+           -webkit-background-size: 200% 100%;
+           -webkit-animation: masked-animation 4s linear infinite;
+           font-size:38px;
+
+       }
+        .two-nav {
+            background: #4db3a4;
+            position: relative;
+            display: none;
+        }
+
+        .three-nav {
+            background: #4db3a4;
+            position: absolute;
+            top: 0;
+            right: -116px;
+            display: none;
+        }
+
+        .item-nav, .two-item, .three-item {
+            width: 126px;
+            text-align: center;
+        }
+
+        .item-nav > a, .two-item > a, .three-item > a {
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .none {
+            display: none;
+        }
+
+        .item-nav:hover > .two-nav {
+            display: block;
+        }
+
+        .two-item:hover > .three-nav {
+            display: block;
+        }
+
+        .item-nav:hover, .two-item:hover, .three-item:hover {
+            background: #44a597;
+        }
+
+        #large-header{
+            height:500px;
+            width:100%;
+            position: relative;
+            border: 0;
+        }
+       #demo-canvas{
+            height:800px;
+            width: 100%;
+            margin: 0 auto;
+            position: absolute;
+            z-index: -2;
+        }
+        img{
+            height:500px;
+            width:100%;
+            margin:0 auto;
+            background-repeat: no-repeat;
+            position: absolute;
+            z-index: -4;
+        }
+        div h2 {
+            z-index: -3;
+            position: absolute;
+            left:350px;
+            top:100px;
+            color:white;
+            font-family:"华文行楷";
+            font-size: 50px;
+            width: 500px;
+            height:100px;
+            opacity: 0.9;
+        }
+        div p{
+            z-index: -3;
+            position: absolute;
+            left:350px;
+            top:250px;
+            color:white;
+            font-family:"华文行楷";
+            font-size: 30px;
+            width: 500px;
+            height:100px;
+            opacity: 0.9;
+        }
+        #explain{
+            text-align: center;
+
+            width:100%;
+            height:300px;
+
+        }
+        .text1{
+            font-size: 20px;
+        }
+    </style>
+
+
+</head>
+<body>
+<div class="top">
+    <ul class="main-nav">
+
+        <div href="fre" id="title">HR人事管理系统</div><!--点击title对页面进行刷新-->
+
+        <li class="item-nav">
+            <a href="javascript:;">员工管理</a>
+            <ul class="two-nav none">
+                <li class="two-item">
+                    <a href="javascript:;">添加</a>
+                    <ul class="three-nav none">
+                        <li class="three-item">
+                            <a href="insert.jsp">增加新员工</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="two-item">
+                    <a href="javascript:;">人员修改</a>
+                    <ul class="three-nav none">
+                        <li class="three-item">
+                            <a href="javascript:;">按编号修改</a>
+                        </li>
+                        <li class="three-item">
+                            <a href="javascript:;">按姓名修改</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="two-item">
+                    <a href="javascript:;">员工删除</a>
+                    <ul class="three-nav none">
+                        <li class="three-item">
+                            <a href="delete.jsp?type=id">按编号删除</a>
+                        </li>
+                        <li class="three-item">
+                            <a href="delete.jsp?type=name">按姓名删除</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="two-item">
+                    <a href="javascript:;">查询员工</a>
+                    <ul class="three-nav none">
+                        <li class="three-item">
+                            <a href="query.jsp?type=id">指定编号</a>
+                        </li>
+                        <li class="three-item">
+                            <a href="query.jsp?type=name">指定姓名</a>
+                        </li>
+                        <li class="three-item">
+                            <a href="showAll.jsp">显示所有</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+
+        <li class="item-nav">
+            <a href="javascript:;">绩效管理</a><!--考勤排班等数据联动算薪
+            系统自动同步人事、排班、考勤、假勤等数据，减少数据核算过程；
+            支持按需维护或批量导入员工薪酬基本信息，高效完成所需的数据采集及汇总。
+
+            兼容各种任务报酬计算模式
+            根据不同的工作岗位（管理人员、服务员、销售员等），支持不同绩效考核模式的设置；
+            根据不同的用工类型（全职工、兼职工、小时工等），支持不同的核算规则设置；
+            高效完成员工激励的结果反馈。
+
+            个税一键计算，报税无忧
+            支持员工适用税率获取计算以及年度累计税计算；
+            支持将税局报税结果下载导入到系统中，比对导入值和系统值的差异；
+            支持将税额等差额转移到指定科目用于财务对账，提高报税过程的效率。
+            -->
+            <ul class="two-nav none">
+                <li class="two-item">
+                    <a href="javascript:;">绩效评分</a>
+                </li>
+                <li class="two-item">
+                    <a href="javascript:;">绩效参数设置</a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="item-nav">
+            <a href="javascript:;">考勤管理</a>
+            <ul class="two-nav none">
+                <li class="two-item">
+                    <a href="javascript:;">考勤表</a>
+                </li>
+            </ul>
+        </li>
+
+
+                <li class="item-nav">
+            <a href="javascript:;">培训管理</a>
+            <ul class="two-nav none">
+                <li class="two-item">
+                    <a href="javascript:;">在线学习</a>
+                </li>
+                <li class="two-item">
+                    <a href="javascript:;">线下课程</a>
+                </li>
+                <li class="two-item">
+                    <a href="javascript:;">讲师资源</a>
+                </li>
+            </ul>
+
+
+        <li class="item-nav">
+            <a href="javascript:;">招聘管理</a>
+            <ul class="two-nav none">
+                <li class="two-item">
+                    <a href="javascript:;">人才库</a>
+                    <ul class="three-nav none">
+                        <li class="three-item">
+                            <a href="javascript:;">我的关注</a>
+                        </li>
+                        <li class="three-item">
+                            <a href="javascript:;">联系提醒</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="two-nav none">
+                <li class="two-item">
+                    <a href="javascript:;">职位管理</a>
+                </li>
+            </ul>
+            <ul class="two-nav none">
+                <li class="two-item">
+                    <a href="javascript:;">岗位需求</a>
+                </li>
+            </ul>
+            <ul class="two-nav none">
+                <li class="two-item">
+                    <a href="javascript:;">简历管理</a>
+                </li>
+            </ul>
+            <ul class="two-nav none">
+                <li class="two-item">
+                    <a href="javascript:;">面试管理</a>
+                </li>
+            </ul>
+            <ul class="two-nav none">
+                <li class="two-item">
+                    <a href="javascript:;">入职通知</a>
+                </li>
+            </ul>
+        </li>
+
+    </ul>
+</div>
+
+
+
+    <div id="large-header">
+        <canvas id="demo-canvas" ></canvas>
+        <img src="image/image.png">
+        <h2>HR人事管理系统</h2>
+        <p>从本质上释放HR的双手，提高工作效能，提升使用体验，助力企业科学决策！</p>
+    </div>
+
+    <div id="explain">
+        <p1 class="text1">产品核心功能</p1>
+    </div>
+
+
+
+
+</body>
+<script src="js/TweenLite.min.js" type="text/javascript"></script>
+<script src="js/EasePack.min.js" type="text/javascript"></script>
+<script src="js/canvasGeneratrix.js" type="text/javascript"></script>
+
+</html>

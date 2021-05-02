@@ -1,3 +1,7 @@
+#Dependences and Targets
+target/classes*
+target/Report-1.0*
+
 # Compiled class file
 *.class
 
