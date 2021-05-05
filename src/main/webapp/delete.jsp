@@ -3,28 +3,94 @@
 <head>
     <title>删除员工</title>
 </head>
+<%--<style type="text/css">--%>
+<%--    table {--%>
+<%--        border-collapse: collapse;--%>
+<%--    }--%>
+
+<%--    table, table tr th{--%>
+<%--        border: 1px solid #ccc;--%>
+<%--    }--%>
+
+<%--    table tr th{--%>
+<%--        padding: 5px 10px;--%>
+<%--    }--%>
+
+<%--    th{--%>
+<%--        width: 80px;--%>
+<%--    }--%>
+
+<%--    .formatTimeTd {--%>
+<%--        width: 250px;--%>
+<%--    }--%>
+
+<%--</style>--%>
+
 <style type="text/css">
-    table {
-        border-collapse: collapse;
-    }
+body{
+background-image: url("/image/111.jpg");
+}
 
-    table, table tr td {
-        border: 1px solid #ccc;
-    }
+table{
+border-collapse:collapse;
+table-layout:fixed;
+border-radius:5px;
+overflow:hidden;
+margin: 10px auto;
+border:1px solid #0331f8;
+background-color: #5a99fc;
+color: #ffffef;
+}
+table td,th {
+ padding: 5px 10px;
+width: 33%;
+text-align: center;
+border:1px solid #70aefb ;
+vertical-align:middle;
+ font-size: 15px;
+width: 80px;
+}
 
-    table tr td {
-        padding: 5px 10px;
-    }
+table thead th{
+    background: #5a99fc;
+}
 
-    td {
-        width: 80px;
-    }
+table tr:nth-child(odd){
+    background: #8dbeff;
+}
 
-    .formatTimeTd {
-        width: 250px;
-    }
+table tr:nth-child(even){
+    background: #3368b6;
+}
 
+.formatTimeTd {
+    width: 250px;
+}
+
+select{
+    background:transparent;
+    width:100px;
+    height:30px;
+    overflow: hidden;
+}
+
+#delParam{
+    font-size:medium;
+    height:30px;
+    border-radius:5px;
+    border:1px solid #c8cccf;
+    color:#6a6f77;
+}
+
+.btn{
+    width:100px;
+    height:30px;
+    background-image: linear-gradient(#03dbf8, #4589ef);
+    font-size: medium;
+    color:#ffffef;
+}
 </style>
+
 <script type="text/javascript">
     const xmlHttpQuery = new XMLHttpRequest();
     const xmlHttpDelete = new XMLHttpRequest();
@@ -131,17 +197,20 @@
         <option name="delType" value="name">按姓名删除</option>
     </select>
     <input id="delParam" placeholder="请根据您的选择输入信息">
-    <button onclick="queryStaff()">查找该员工</button>
+    &nbsp;&nbsp;&nbsp;
+    <button class="btn" onclick="queryStaff()">查找该员工</button>
     <table id="displayTable">
+        <thead>
         <tr>
-            <td>编号</td>
-            <td>姓名</td>
-            <td>性别</td>
-            <td>工作</td>
-            <td>部门</td>
-            <td class="formatTimeTd">入职时间</td>
-            <td class="formatTimeTd">生日</td>
+            <th>编号</th>
+            <th>姓名</th>
+            <th>性别</th>
+            <th>工作</th>
+            <th>部门</th>
+            <th class="formatTimeTd">入职时间</th>
+            <th class="formatTimeTd">生日</th>
         </tr>
+        </thead>
     </table>
     <h2 align="center"><a href="javascript:;" onclick="deleteStaff()">确认删除</a></h2>
 </div>

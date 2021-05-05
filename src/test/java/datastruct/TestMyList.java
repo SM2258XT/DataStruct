@@ -3,13 +3,14 @@ package datastruct;
 import com.xhu.datastruct.MyDoubleLoopLinkedList;
 import com.xhu.datastruct.MyLinkedList;
 import com.xhu.datastruct.MyList;
+import com.xhu.datastruct.MyStack;
 import com.xhu.domain.Staff;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Date;
 
-public class TestDataStruct {
+public class TestMyList {
     public static final int id = 20190;
     public static final int numbers = 6;
     public static ArrayList<Staff> createList(){
@@ -50,4 +51,5 @@ public class TestDataStruct {
         list.push(new Staff(45324524, "李大妈", "女", "法学", "部门15", new Date().toString(), new Date().toString()));
         //testMyList(list);
     }
+
 }

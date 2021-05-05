@@ -59,14 +59,13 @@
             for (let key in obj) {    //为Staff的每个属性添加到单独的<td>中
                 const td = document.createElement("td");
                 td.innerText = obj[key];
-                //console.log(key + " " + obj[key]);
                 tr.appendChild(td);
             }
             const td_change = document.createElement("td");
             const td_delete = document.createElement("td");
             const td_status = document.createElement("td");
-            td_change.innerHTML = "<a href='change.jsp?type=id&param="+obj['id']+"'>修改</a>";
-            td_delete.innerHTML = "<a href='delete.jsp?type=id&param="+obj['id']+"'>删除</a>";
+            td_change.innerHTML = "<a href="+obj['id']+"change.jsp?type=id&param=>修改</a>";
+            td_delete.innerHTML = "<a href=delete.jsp?type=id&param="+obj['id']+">删除</a>";
             td_status.innerHTML = "<a href='/'></a>";
             tr.appendChild(td_change);
             tr.appendChild(td_delete);
@@ -88,7 +87,6 @@
 
     window.onload = function () {
         const params = getUrlVars();
-        var isExist = false;
         console.log("params.length = " + params.length);
         if (params.length === 2) {
             var type = params["type"],
@@ -114,8 +112,6 @@
             <option name="delType" value="name">按姓名查询</option>
         </select>
         <input id="delParam" placeholder="请根据您的选择输入信息">
-        <br>
-        <h2 align="center"><a href="javascript:;" onclick="queryStaff()">查询</a></h2>
     </div>
     <table id="displayTable">
         <tr>
@@ -131,6 +127,8 @@
             <td>状态</td>
         </tr>
     </table>
+    <br>
+    <h2 align="center"><a href="javascript:;" onclick="queryStaff()">查询</a></h2>
 </div>
 </body>
 </html>

@@ -57,7 +57,7 @@
                 const td_change = document.createElement("td");
                 const td_delete = document.createElement("td");
                 const td_status = document.createElement("td");
-                td_change.innerHTML = "<a href='change.jsp?type=id&param="+obj['id']+"'>修改</a>";
+                td_change.innerHTML = "<a href="+obj['id']+"'change.jsp?type=id&param='>修改</a>";
                 td_delete.innerHTML = "<a href='delete.jsp?type=id&param="+obj['id']+"'>删除</a>";
                 td_status.innerHTML = "<a href='/'></a>";
                 tr.appendChild(td_change);
