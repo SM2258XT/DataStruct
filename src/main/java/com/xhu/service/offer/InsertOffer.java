@@ -1,4 +1,4 @@
-package com.xhu.service;
+package com.xhu.service.offer;
 
 import com.xhu.datastruct.MyTree23;
 import com.xhu.utils.WEBUtils;

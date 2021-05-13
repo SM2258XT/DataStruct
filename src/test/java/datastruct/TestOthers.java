@@ -1,6 +1,7 @@
 package datastruct;
 
 import com.xhu.datastruct.MyQueue;
+import com.xhu.datastruct.MySeqList;
 import com.xhu.datastruct.MyStack;
 import com.xhu.datastruct.MyTree23;
 import org.junit.jupiter.api.Test;
@@ -86,5 +87,14 @@ public class TestOthers {
         System.out.println("出队列：" + queue.pop());
         System.out.println("出队列：" + queue.pop());
         System.out.println("出队列：" + queue.pop());
+    }
+
+    @Test
+    public void testMySeqList() {
+        MySeqList list = new MySeqList();
+        list.insert(15, 0);
+        list.displayList();
+        //System.out.println(list.getDataByIndex(0));
+
     }
 }

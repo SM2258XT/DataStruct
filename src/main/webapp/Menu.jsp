@@ -1,7 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
 <head>
-    <meta charset="UTF-8">
     <title>菜单栏</title>
     <style>
         @keyframes masked-animation {
@@ -318,6 +317,4 @@
 
 
 </body>
-
-
 </html>

@@ -54,7 +54,7 @@ public class StaffDao {
         return false;
     }
 
-    public MyList select(String sql) {
+    public MyDoubleLoopLinkedList select(String sql) {
         try {
             stat = con.createStatement();
             res = stat.executeQuery(sql);
@@ -82,7 +82,7 @@ public class StaffDao {
         return list;
     }
 
-    public MyList selectAll() {
+    public MyDoubleLoopLinkedList selectAll() {
         return select("select * from " + TABLE_NAME + ";");
     }
 

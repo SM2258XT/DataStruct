@@ -3,99 +3,96 @@
 <head>
     <title>删除员工</title>
 </head>
-<%--<style type="text/css">--%>
-<%--    table {--%>
-<%--        border-collapse: collapse;--%>
-<%--    }--%>
-
-<%--    table, table tr th{--%>
-<%--        border: 1px solid #ccc;--%>
-<%--    }--%>
-
-<%--    table tr th{--%>
-<%--        padding: 5px 10px;--%>
-<%--    }--%>
-
-<%--    th{--%>
-<%--        width: 80px;--%>
-<%--    }--%>
-
-<%--    .formatTimeTd {--%>
-<%--        width: 250px;--%>
-<%--    }--%>
-
-<%--</style>--%>
-
 <style type="text/css">
-body{
-background-image: url("/image/111.jpg");
-}
-
-table{
-border-collapse:collapse;
-table-layout:fixed;
-border-radius:5px;
-overflow:hidden;
-margin: 10px auto;
-border:1px solid #0331f8;
-background-color: #5a99fc;
-color: #ffffef;
-}
-table td,th {
- padding: 5px 10px;
-width: 33%;
-text-align: center;
-border:1px solid #70aefb ;
-vertical-align:middle;
- font-size: 15px;
-width: 80px;
-}
-
-table thead th{
-    background: #5a99fc;
-}
-
-table tr:nth-child(odd){
-    background: #8dbeff;
-}
-
-table tr:nth-child(even){
-    background: #3368b6;
-}
-
-.formatTimeTd {
-    width: 250px;
-}
-
-select{
-    background:transparent;
-    width:100px;
-    height:30px;
-    overflow: hidden;
-}
-
-#delParam{
-    font-size:medium;
-    height:30px;
-    border-radius:5px;
-    border:1px solid #c8cccf;
-    color:#6a6f77;
-}
-
-.btn{
-    width:100px;
-    height:30px;
-    background-image: linear-gradient(#03dbf8, #4589ef);
-    font-size: medium;
-    color:#ffffef;
-}
+    body {
+        background-image: url("/image/change_bac.jpg");
+        font-size: 15px;
+    }
+    table {
+        border-collapse: collapse;
+        table-layout: fixed;
+        overflow: hidden;
+        margin-top: 130px;
+        border: 1px solid darkseagreen;
+    }
+    table td, th {
+        padding: 5px 10px;
+        text-align: center;
+        border: 1px solid gray;
+        vertical-align: middle;
+        width: 80px;
+    }
+    tr:nth-child(2) {
+        background-color: lightseagreen;
+        height: 85px
+    }
+    tr:nth-child(2n+3) {
+        background-color: #4db3a4;
+        height: 50px
+    }
+    tr:nth-child(2n+4) {
+        background-color: azure;
+        height: 50px
+    }
+    #delete-title {
+        height: 100px;
+        background-color: #00FFFF;
+    }
+    #delete-title-text {
+        font-size: 27px;
+        color: #ff2200;
+        text-shadow: 0 0 4px white,
+        0 -5px 4px #ff3,
+        2px -10px 6px #fd3,
+        -2px -15px 11px #f80,
+        2px -25px 18px #f20;
+    }
+    .formatTimeTd {
+        width: 250px;
+    }
+    select {
+        background: transparent;
+        width: 100px;
+        height: 30px;
+        overflow: hidden;
+    }
+    #queParam {
+        font-size: medium;
+        height: 30px;
+        border-radius: 5px;
+        border: 1px solid #c8cccf;
+        color: #6a6f77;
+        margin-left: 30px;
+        margin-right: 30px;
+    }
+    .btn {
+        color: darkseagreen;
+        padding: 10px;
+        font-size: medium;
+    }
+    #url {
+        width: 1045px;
+        height: 70px;
+        margin-top: 30px;
+        background-color: azure;;
+        display: table-cell;
+        vertical-align: middle;
+    }
+    a {
+        color: darkseagreen;
+        border: 2px slategray solid;
+        border-radius: 2em;
+        text-decoration: none;
+        padding: 10px;
+    }
+    a:hover {
+        color: red;
+    }
 </style>
-
 <script type="text/javascript">
     const xmlHttpQuery = new XMLHttpRequest();
     const xmlHttpDelete = new XMLHttpRequest();
     let selected = false;
-
     function queryStaff() {
         console.log("=====开始查询=====");
         xmlHttpQuery.onreadystatechange = function () {
@@ -111,15 +108,12 @@ select{
                 addTableTr(document.getElementById("displayTable"), array);
             }
         }
-
         const type = document.getElementsByName("delType")[0].selected ? "id" : "name";
-        const param = document.getElementById("delParam").value;
-
+        const param = document.getElementById("queParam").value;
         console.log("查询URL:  " + "http://localhost/QueryStaff.do?type=" + type + "&param=" + param);
         xmlHttpQuery.open("get", "http://localhost/QueryStaff.do?type=" + type + "&param=" + param, true);
         xmlHttpQuery.send();
     }
-
     function deleteStaff() {
         if (selected === false) {
             alert("请先选择员工后再删除！");
@@ -132,23 +126,19 @@ select{
                 console.log(resText);
                 const msg = resText === "true" ? "删除成功！" : "删除失败！";
                 if (confirm(msg + "\n是否跳转到主页面？"))
-                    window.location.replace("Menu.html");
+                    window.location.replace("Menu.jsp");
             }
         }
-
         const type = document.getElementsByName("delType")[0].selected ? "id" : "name";
-        const param = document.getElementById("delParam").value;
-
+        const param = document.getElementById("queParam").value;
         console.log("删除URL: http://localhost/DeleteStaff.do?type=" + type + "&param=" + param);
         xmlHttpDelete.open("get", "http://localhost/DeleteStaff.do?type=" + type + "&param=" + param, true);
         xmlHttpDelete.send();
     }
-
     function addTableTr(tableEle, array) {
         for (let i = 0; i < array.length; i++) {
             const obj = JSON.parse(array[i]);           //将数组的第i个元素转化为单个obj
             const tr = document.createElement("tr");
-
             for (let key in obj) {    //为Staff的每个属性添加到单独的<td>中
                 const td = document.createElement("td");
                 td.innerText = obj[key];
@@ -158,10 +148,8 @@ select{
             tableEle.appendChild(tr);
         }
     }
-
     function getUrlVars() {
-        var vars = [],
-            hash;
+        var vars = [], hash;
         var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
         for (var i = 0; i < hashes.length; i++) {
             hash = hashes[i].split('=');
@@ -170,7 +158,6 @@ select{
         }
         return vars;
     }
-
     window.onload = function () {
         const params = getUrlVars();
         var isExist = false;
@@ -180,7 +167,7 @@ select{
                 param = params["param"];
             let index = type === "id" ? 0 : 1;
             document.getElementsByName("delType")[index].selected = true;
-            document.getElementById("delParam").value = param;
+            document.getElementById("queParam").value = param;
             queryStaff();
         } else if (params.length === 1) {
             var type = params["type"];
@@ -190,17 +177,23 @@ select{
     }
 </script>
 <body>
-
 <div align="center">
-    <select>
-        <option name="delType" value="id">按编号删除</option>
-        <option name="delType" value="name">按姓名删除</option>
-    </select>
-    <input id="delParam" placeholder="请根据您的选择输入信息">
-    &nbsp;&nbsp;&nbsp;
-    <button class="btn" onclick="queryStaff()">查找该员工</button>
     <table id="displayTable">
-        <thead>
+        <tr id="delete-title">
+            <td colspan="7" id="delete-title-text">删除员工</td>
+        </tr>
+        <tr>
+            <td colspan="7"><select>
+                <option name="delType" value="id">按编号删除</option>
+                <option name="delType" value="name">按姓名删除</option>
+            </select>
+
+                <input id="queParam" placeholder="请根据您的选择输入信息">
+
+
+                <button class="btn" onclick="queryStaff()">查找该员工</button>
+            </td>
+        </tr>
         <tr>
             <th>编号</th>
             <th>姓名</th>
@@ -210,9 +203,9 @@ select{
             <th class="formatTimeTd">入职时间</th>
             <th class="formatTimeTd">生日</th>
         </tr>
-        </thead>
+        </tr>
     </table>
-    <h2 align="center"><a href="javascript:;" onclick="deleteStaff()">确认删除</a></h2>
+    <div id="url"><a href="javascript:;" onclick="deleteStaff()"><span>确认删除</span></a></div>
 </div>
 </body>
 </html>

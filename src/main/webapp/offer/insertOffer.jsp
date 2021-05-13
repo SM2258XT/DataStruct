@@ -2,11 +2,34 @@
 <html>
 <head>
     <title>插入岗位</title>
+    <style>
+        body {
+            background-image: url("/image/change_bac.jpg");
+            text-align: center;
+            font-size: 40px;
+        }
+
+        table {
+            margin-top: 150px;
+            border-spacing: 20px;
+        }
+
+        select {
+            width: 200px;
+            height: 30px;
+        }
+
+        input {
+            width: 200px;
+            height: 30px;
+        }
+    </style>
 </head>
 <body>
 <div align="center">
     <form action="/InsertOffer.do">
         <table>
+            <tr></tr>
             <tr>
                 <td>
                     <select name="jobNum">
@@ -22,9 +45,9 @@
                         <option name="jobNum" value="9">云计算工程技术人员</option>
                     </select>
                 </td>
-                <td>
-                    <input type="submit" value="发布该岗位">
-                </td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="发布该岗位"></td>
             </tr>
         </table>
     </form>

@@ -1,5 +1,8 @@
 package com.xhu.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.xhu.datastruct.MySeqList;
+
 public class Staff {
     private Integer id;
     private String name;
@@ -8,6 +11,8 @@ public class Staff {
     private String dept;
     private String entryday;
     private String birthday;
+    @JsonIgnore
+    private MySeqList grades;
 
     @Override
     public String toString() {
@@ -33,6 +38,14 @@ public class Staff {
         this.dept = dept;
         this.entryday = entryday;
         this.birthday = birthday;
+    }
+
+    public MySeqList getGrades() {
+        return grades;
+    }
+
+    public void setGrades(MySeqList grades) {
+        this.grades = grades;
     }
 
     public Integer getId() {
@@ -90,4 +103,5 @@ public class Staff {
     public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
+
 }

@@ -1,60 +1,108 @@
 package com.xhu.datastruct;
-
-import com.xhu.domain.Staff;
-
-public class MyDoubleLinkedList implements MyList{
-    private static class DoubleNode{
-        /*
-            该类相当于c++中的双向链表Node结构体，
-            存放了：双向链表开始、结尾的节点，以及当前节点指向的雇员。
-         */
-        public DoubleNode next;
-        public DoubleNode before;
-        public Staff staff;
-
-        public DoubleNode() {
+public class MyDoubleLinkedList<T> {
+    private ChainNode<T> headNode;
+    private ChainNode<T> lastNode;
+    private int size;
+    public MyDoubleLinkedList() {
+        this.headNode = new ChainNode<T>(null);
+        this.lastNode = headNode;
+    }
+    public void addNode(T data) {
+        ChainNode<T> node = new ChainNode<T>(data);
+        if(lastNode != null){
+            lastNode.nextChainNode = node;
+            node.preChainNode = node;
+            node.setDataNo(size);
+            lastNode = node;
+            size++;
         }
     }
-
-    @Override
-    public int size() {
-        return 0;
+    public void deleteNode(int dataNo) throws Exception {
+        if(getSize() == 0){
+            throw new Exception("chain is empty");
+        }
+        for (ChainNode<T> node = headNode.nextChainNode;node != null;node = node.nextChainNode) {
+            if(node.getDataNo() == dataNo){
+                node.preChainNode.nextChainNode = node.nextChainNode;
+                if(node.nextChainNode != null){
+                    node.nextChainNode.preChainNode = node.preChainNode;
+                }
+                node.nextChainNode = null;
+                node.preChainNode = null;
+                size--;
+                for (ChainNode<T> chainNode = node.nextChainNode;chainNode != null;chainNode = chainNode.nextChainNode) {
+                    chainNode.setDataNo(chainNode.getDataNo()-1);
+                }
+                return;
+            }
+        }
+        throw new Exception("the corresponding data that can not be found");
     }
-
-    @Override
-    public boolean push(Staff staff) {
+    public T get(int dataNo) throws Exception {
+        if(getSize() == 0){
+            throw new Exception("chain is empty");
+        }
+        for (ChainNode<T> node = headNode.nextChainNode;node != null;node = node.nextChainNode) {
+            if(node.getDataNo() == dataNo){
+                return node.getData();
+            }
+        }
+        throw new Exception("the corresponding data that can not be found");
+    }
+    public void set(int dataNo,T data) throws Exception {
+        if(getSize() == 0){
+            throw new Exception("chain is empty");
+        }
+        for (ChainNode<T> node = headNode.nextChainNode;node != null;node = node.nextChainNode) {
+            if(node.getDataNo() == dataNo){
+                node.setData(data);
+                return;
+            }
+        }
+        throw new Exception("the data that is to be modified can not be found");
+    }
+    public boolean isContains(T data) throws Exception {
+        if(getSize() == 0){
+            throw new Exception("chain is empty");
+        }
+        for (ChainNode<T> chainNode = headNode.nextChainNode;chainNode != null;chainNode = chainNode.nextChainNode) {
+            if(chainNode.getData() == data){
+                return true;
+            }
+        }
         return false;
     }
-
-    @Override
-    public boolean remove(int id) {
-        return false;
+    public int getSize() {
+        return size;
     }
+    private static class ChainNode<T> {
+        private T data;
+        //对象编号
+        private int dataNo;
 
-    @Override
-    public boolean exist(int id) {
-        return false;
+        public ChainNode<T> nextChainNode;
+        public ChainNode<T> preChainNode;
+        public ChainNode(T data, ChainNode<T> nextChainNode,
+                         ChainNode<T> preChainNode) {
+            this.data = data;
+            this.nextChainNode = nextChainNode;
+            this.preChainNode = preChainNode;
+        }
+        public ChainNode(T data) {
+            this.data = data;
+        }
+        public int getDataNo() {
+            return dataNo;
+        }
+        public void setDataNo(int dataNo) {
+            this.dataNo = dataNo;
+        }
+        public void setData(T data) {
+            this.data = data;
+        }
+        public T getData() {
+            return data;
+        }
     }
-
-    @Override
-    public boolean isEmpty() {
-        return false;
-    }
-
-    @Override
-    public Staff getStaffById(int id) {
-        return null;
-    }
-
-    @Override
-    public Staff getStaffByIndex(int index) {
-        return null;
-    }
-
-    @Override
-    public Staff getStaffByName(String name) {
-        return null;
-    }
-
-
 }
+

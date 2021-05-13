@@ -3,7 +3,7 @@ package com.xhu.datastruct;
 import com.sun.istack.internal.NotNull;
 import com.xhu.domain.Staff;
 
-public class MyDoubleLoopLinkedList implements MyList {
+public class MyDoubleLoopLinkedList {
     private DoubleNode startNode;
     private int size;
 
@@ -24,12 +24,10 @@ public class MyDoubleLoopLinkedList implements MyList {
         }
     }
 
-    @Override
     public int size() {
         return size;
     }
 
-    @Override
     @NotNull
     public boolean push(final Staff staff) {
         if (isEmpty()) {
@@ -55,7 +53,6 @@ public class MyDoubleLoopLinkedList implements MyList {
         return true;
     }
 
-    @Override
     public boolean remove(final int id) {
         DoubleNode tagNode = getNodeById(id);
         if (tagNode == null)
@@ -71,17 +68,14 @@ public class MyDoubleLoopLinkedList implements MyList {
         return true;
     }
 
-    @Override
     public boolean exist(final int id) {
         return getNodeById(id) != null;
     }
 
-    @Override
     public Staff getStaffById(final int id) {
         return getNodeById(id).staff;
     }
 
-    @Override
     public Staff getStaffByIndex(final int index) {
         if (isEmpty() || index < 0 || index > size)
             return null;
@@ -91,12 +85,11 @@ public class MyDoubleLoopLinkedList implements MyList {
         return node.staff;
     }
 
-    @Override
     public Staff getStaffByName(final String name) {
-        return getNodeByName(name).staff;
+        DoubleNode node = getNodeByName(name);
+        return node == null ? null : node.staff;
     }
 
-    @Override
     public boolean isEmpty() {
         return startNode == null;
     }

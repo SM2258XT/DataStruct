@@ -1,7 +1,5 @@
 package com.xhu.utils;
-
 import java.sql.*;
-
 public class DBUtils {
     static {
         try {
@@ -10,9 +8,7 @@ public class DBUtils {
             System.out.println("JDBC:驱动加载失败！");
         }
     }
-
     private DBUtils(){}
-
     public static Connection getConnection(String database,String user,String pwd){
         Connection con = null;
         try {
@@ -22,7 +18,6 @@ public class DBUtils {
         }
         return con;
     }
-
     public static void close(Connection con,Statement stat,ResultSet res){
         if(res != null){
             try {
@@ -46,5 +41,4 @@ public class DBUtils {
             }
         }
     }
-
 }

@@ -1,4 +1,4 @@
-package com.xhu.service;
+package com.xhu.service.staff;
 
 import com.xhu.dao.StaffDao;
 import com.xhu.domain.Staff;
@@ -9,10 +9,9 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Map;
 
-@WebServlet("/InsertStaff.do")
-public class InsertStaff extends HttpServlet {
+@WebServlet("/UpdateStaff.do")
+public class UpdateStaff extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
@@ -43,6 +42,7 @@ public class InsertStaff extends HttpServlet {
         staff.setDept(dept);
         staff.setEntryday(entryday);
         staff.setBirthday(birthday);
+        dao.delete(staff.getId());
         if(dao.insert(staff))
             pw.write("true");
         else

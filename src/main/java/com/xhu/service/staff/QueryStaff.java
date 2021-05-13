@@ -1,7 +1,8 @@
-package com.xhu.service;
+package com.xhu.service.staff;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.xhu.dao.StaffDao;
+import com.xhu.datastruct.MyDoubleLoopLinkedList;
 import com.xhu.datastruct.MyList;
 import com.xhu.domain.Staff;
 import com.xhu.utils.WEBUtils;
@@ -13,8 +14,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-@WebServlet("/DeleteStaff.do")
-public class DeleteStaff extends HttpServlet {
+@WebServlet("/QueryStaff.do")
+public class QueryStaff extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
@@ -22,42 +23,46 @@ public class DeleteStaff extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        /*
-            URL访问格式：
-                http:/**./DeleteStaff.do?type=id&param=135135
-        */
         String type = request.getParameter("type");     //type指明是按学号还是按姓名查找
         String param = request.getParameter("param");   //根据type确定参数是学号还是姓名
-        //System.out.println("type=" + type + "   param=" + param);
         if (!WEBUtils.notNullOrEmpty(type, param)) {
             System.out.println("参数非法！");
             return;
         }
 
         PrintWriter pw = response.getWriter();
+        ObjectMapper mapper = new ObjectMapper();
         StaffDao dao = new StaffDao();
         Staff staff = null;
-        MyList list = dao.selectAll();
-        boolean finished = false;
+        boolean exist = true;
+
+        MyDoubleLoopLinkedList list = dao.selectAll();
         if ("id".equals(type)) {
             final int id = Integer.parseInt(param);
             if (list.exist(id))
-                finished = dao.delete(id);
+                staff = list.getStaffById(id);
             else {
                 System.out.println("不存在 id 为 " + id + " 的学生");
-                return;
+                exist = false;
             }
         } else if ("name".equals(type)) {
-            staff = list.getStaffByName(param);
-            if (staff == null) {       //如果找不到该学生
+            staff = list.getStaffByName(param); //此处的param为name姓名
+            if (staff == null) {
                 System.out.println("不存在 name 为 " + param + " 的学生");
-                return;
-            } else
-                finished = dao.delete(staff.getId());
+                exist = false;
+            }
         }
 
-        String msg = finished ? "true" : "false";
-        pw.write(msg);
+        if (!exist){
+            pw.write("false");
+            return;
+        }
+
+        String jsonObj = mapper.writeValueAsString(staff);
+        ArrayList<String> arrayList = new ArrayList<>();
+        arrayList.add(jsonObj);
+        String jsonList = mapper.writeValueAsString(arrayList);
+        pw.write(jsonList);
         dao.close();
     }
 }

@@ -1,8 +1,9 @@
-package com.xhu.service;
+package com.xhu.service.staff;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.xhu.dao.StaffDao;
+import com.xhu.datastruct.MyDoubleLoopLinkedList;
 import com.xhu.datastruct.MyList;
 import com.xhu.domain.Staff;
 
@@ -26,7 +27,7 @@ public class QueryAllStaff extends HttpServlet {
         String jsonObj = null, jsonList = null;
 
         StaffDao dao = new StaffDao();
-        MyList list = dao.selectAll();
+        MyDoubleLoopLinkedList list = dao.selectAll();
         ArrayList<String> arrayList = new ArrayList<String>();
         try {
             for (int i = 0; i < list.size(); i++) {
